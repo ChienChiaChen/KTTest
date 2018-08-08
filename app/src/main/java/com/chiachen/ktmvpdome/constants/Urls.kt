@@ -9,7 +9,7 @@ object Urls {
      * Base Urls and queries for api.themoviedb.org
      */
     const val MOVIEDB_BASE_URL = "https://api.themoviedb.org/3/search/"
-    const val MOVIEDB_API_KEY_VALUE = "6efc30f1fdcbe7425ab08503f07e2762"
+    const val MOVIEDB_API_KEY_VALUE = "d67e474783dd86024a43ff5db571bed2"
     const val MOVIEDB_API_KEY_QUERY = "api_key"
     const val MOVIEDB_MOVIE_TITLE_QUERY = "query"
     const val MOVIEDB_PAGE_QUERY = "page"
