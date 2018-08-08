@@ -25,3 +25,9 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+ext {
+    //Test dependencies
+    junitVersion = '4.12'
+    mockitoVersion = '2.7.1'
+    dagger2Version = '2.8'
+}
