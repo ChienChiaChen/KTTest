@@ -7,12 +7,13 @@ import android.widget.Toast
 import com.chiachen.ktmvpdome.adapters.MovieSearchAdapter
 import com.chiachen.ktmvpdome.interfaces.MainActivityContract
 import com.chiachen.ktmvpdome.presenters.MainActivityPresenter
+import com.chiachen.ktmvpdome.utils.AppSchedulerProvider
 import com.mvp.moviedbapi.models.apis.SearchResults
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainActivityContract.MainActivityView {
 
-    private var mPresenter = MainActivityPresenter()
+    private var mPresenter = MainActivityPresenter(AppSchedulerProvider())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
