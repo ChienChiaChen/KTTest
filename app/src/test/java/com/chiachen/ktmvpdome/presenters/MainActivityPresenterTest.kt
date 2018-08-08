@@ -7,7 +7,6 @@ import com.chiachen.ktmvpdome.testutil.TestSchedulerProvider
 import com.mvp.moviedbapi.models.apis.SearchResults
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
@@ -22,7 +21,6 @@ import rx.schedulers.TestScheduler
  * Created by jianjiacheng on 2018/8/8.
  */
 
-//@RunWith(AndroidJUnit4::class)
 class MainActivityPresenterTest {
 
     companion object {
@@ -35,6 +33,7 @@ class MainActivityPresenterTest {
     lateinit var testSchedulerProvider: TestSchedulerProvider
     lateinit var mPresenter: MainActivityPresenter
     private lateinit var testScheduler: TestScheduler
+    lateinit var movieSearchService: MovieSearchService
 
     @Before
     fun setup() {
@@ -43,6 +42,7 @@ class MainActivityPresenterTest {
         testSchedulerProvider = TestSchedulerProvider(testScheduler)
         mPresenter = MainActivityPresenter(testSchedulerProvider)
         mPresenter.attach(mockView)
+        movieSearchService = mock()
     }
 
     @Test
@@ -54,20 +54,20 @@ class MainActivityPresenterTest {
     @Test
     fun test_search_movie_error() {
         val mockedResponse: Throwable = mock()
-        var movieSearchService: MovieSearchService = mock()
+
         Mockito.doReturn(Observable.just(mockedResponse))
                 .`when`(movieSearchService)
                 .getMovies(anyString(), anyString(), anyInt())
 
-        mPresenter.searchMovie(SEARCH, 1)
+        mPresenter.searchMovie("Test", anyInt())
         testScheduler.triggerActions()
-        verify(mockView, Mockito.atLeastOnce()).showToast(R.string.search_error_text)
+        Mockito.verify(mockView, Mockito.atLeastOnce()).showToast(R.string.search_error_text)
     }
 
     @Test
     fun test_search_movie_successful() {
         val mockedResponse: SearchResults = mock()
-        var movieSearchService: MovieSearchService = mock()
+
         Mockito.doReturn(Observable.just(mockedResponse))
                 .`when`(movieSearchService)
                 .getMovies(anyString(), anyString(), anyInt())
